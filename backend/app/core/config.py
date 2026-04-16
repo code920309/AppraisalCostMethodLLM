@@ -19,8 +19,8 @@ class Config:
     LLM_API_URL = os.getenv("LLM_API_URL", "https://api.openai.com/v1/chat/completions")
     
     # Model Paths
-    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    YOLO_MODEL_PATH = os.path.join(BASE_DIR, os.getenv("YOLO_MODEL_PATH", "models/yolov8m-seg.pt"))
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    YOLO_MODEL_PATH = os.path.join(BASE_DIR, "models", "yolov8m-seg.pt")
     
     # Log Config
     LOG_DIR = os.path.join(BASE_DIR, "logs")
