@@ -1,0 +1,6 @@
+{
+  "name": "AppraisalCost AI",
+  "description": "AI-powered building condition diagnosis and automated desktop appraisal system using building ledger data and computer vision.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}

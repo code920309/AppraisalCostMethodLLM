@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        @page {
+            size: a4;
+            margin: 0;
+        }
+
+        body {
+            font-family: 'NanumGothic', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .page {
+            width: 210mm;
+            height: 296mm;
+            padding: 25mm;
+            margin: 0 auto;
+            background: white;
+            position: relative;
+            box-sizing: border-box;
+            page-break-after: always;
+        }
+
+        /* 1페이지: 표지 스타일 */
+        .cover-top-line {
+            height: 8px;
+            background: linear-gradient(to right, #009688 70%, #ccc 30%);
+            margin-bottom: 60px;
+        }
+
+        .cover-title {
+            text-align: center;
+            font-size: 40pt;
+            font-family: 'NanumGothicBold';
+            letter-spacing: 12px;
+            margin-top: 50px;
+        }
+
+        .cover-subtitle {
+            text-align: center;
+            font-size: 18pt;
+            color: #666;
+            letter-spacing: 3px;
+            margin-bottom: 100px;
+        }
+
+        .cover-table {
+            width: 80%;
+            margin: 0 auto;
+            border-top: 2px solid #333;
+            border-bottom: 2px solid #333;
+            border-collapse: collapse;
+        }
+
+        .cover-table th,
+        .cover-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            font-size: 12pt;
+        }
+
+        .cover-table th {
+            background: #f9f9f9;
+            width: 30%;
+            text-align: center;
+            font-family: 'NanumGothicBold';
+        }
+
+        /* 2페이지: 가격심의/의견서 스타일 */
+        .page-header {
+            border-bottom: 3px solid #009688;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            font-size: 18pt;
+            font-family: 'NanumGothicBold';
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .section-title {
+            font-size: 14pt;
+            font-family: 'NanumGothicBold';
+            margin: 25px 0 10px 0;
+            padding-left: 10px;
+            border-left: 5px solid #009688;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .data-table th,
+        .data-table td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-size: 10pt;
+        }
+
+        .data-table th {
+            background: #f2f2f2;
+            width: 25%;
+        }
+
+        .price-highlight {
+            font-size: 13pt;
+            font-family: 'NanumGothicBold';
+            color: #d32f2f;
+        }
+
+        .markdown-text {
+            font-size: 10pt;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        /* 사진 영역 */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .photo-box {
+            border: 1px solid #ddd;
+            padding: 5px;
+            text-align: center;
+        }
+
+        .photo-box img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            background: #f0f0f0;
+        }
+
+        .photo-label {
+            font-size: 9pt;
+            margin-top: 5px;
+            font-family: 'NanumGothicBold';
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 1페이지: 표지 (Cover) -->
+    <div class="page">
+        <div class="cover-top-line"></div>
+        <div class="cover-title">A I 감 정 평 가 서</div>
+        <div class="cover-subtitle">AI Appraisal Report</div>
+
+        <table class="cover-table" style="margin-top: 50px;">
+            <tr>
+                <th>건 명</th>
+                <td>{{ address }} 소재 부동산 가치산정</td>
+            </tr>
+            <tr>
+                <th>의 뢰 인</th>
+                <td>-</td>
+            </tr>
+            <tr>
+                <th>분석기관</th>
+                <td>AppraisalCost AI Professional</td>
+            </tr>
+            <tr>
+                <th>기준일자</th>
+                <td>2026년 04월 16일</td>
+            </tr>
+        </table>
+
+        <div style="position: absolute; bottom: 80px; width: calc(100% - 50mm); text-align: center; border-top: 1px solid #ddd; padding-top: 20px;">
+            <p style="font-size: 14pt; font-family: 'NanumGothicBold';">(주) AppraisalCost AI 감정평가팀</p>
+            <p style="font-size: 9pt; color: #888;">AI Vision 분석 및 LLM 기반 자동 감정 시스템</p>
+        </div>
+    </div>
+
+    <!-- 2페이지: 요약 및 산출 근거 (Summary & Calculation) -->
+    <div class="page">
+        <div class="page-header">
+            <span>감정평가 요약 및 산출근거</span>
+            <span style="font-size: 10pt; color: #666;">No. A2026-{{ address[:4] | upper }}</span>
+        </div>
+
+        <div class="section-title">1. 물건 개요 및 평가 가액</div>
+        <table class="data-table">
+            <tr>
+                <th>소재지</th>
+                <td colspan="3">{{ address }}</td>
+            </tr>
+            <tr>
+                <th>구조/종류</th>
+                <td>{{ structure_type }}</td>
+                <th>경과연수</th>
+                <td>{{ elapsed_years }}년</td>
+            </tr>
+            <tr>
+                <th>감정평가액</th>
+                <td colspan="3" class="price-highlight">
+                    {% if total_value != "0원" and total_value != "-" %}
+                    {{ total_value }} (일백만원 미만 절사)
+                    {% else %}
+                    <span style="color: grey;">[데이터 미수신: 금액을 확인하세요]</span>
+                    {% endif %}
+                </td>
+            </tr>
+        </table>
+
+        <div class="section-title" style="margin-top: 40px;">2. 원가법 산정 상세 내역</div>
+        <table class="data-table">
+            <tr>
+                <th>재조달원가</th>
+                <td style="text-align: right;">{{ replacement_cost }}</td>
+                <td style="font-size: 8pt; color: #666; width: 30%;">신축 시점의 추정 공사비</td>
+            </tr>
+            <tr>
+                <th>물리적 감가상각</th>
+                <td style="text-align: right; color: #d32f2f;">- {{ physical_depreciation }}</td>
+                <td style="font-size: 8pt; color: #666;">내용연수 경과에 따른 감가</td>
+            </tr>
+            <tr>
+                <th>AI 관찰감가 보정</th>
+                <td style="text-align: right; color: #d32f2f;">- {{ observation_depreciation }}</td>
+                <td style="font-size: 8pt; color: #666;">Vision 분석 결함률 반영</td>
+            </tr>
+            <tr>
+                <th style="background: #e0f2f1;">최종 적산가액</th>
+                <td style="text-align: right;" class="price-highlight">{{ total_value }}</td>
+                <td style="font-size: 8pt; font-family: 'NanumGothicBold';">현행 시장 가치 추정치</td>
+            </tr>
+        </table>
+        
+        <div style="margin-top: 50px; padding: 20px; border: 1px solid #eee; background: #fafafa; font-size: 9pt; color: #666; line-height: 1.6;">
+            ※ 산출 근거 요약<br>
+            대상 물건은 {{ structure_type }}로서 신축 시점의 재조달원가 산정 후, {{ elapsed_years }}년의 경과연수에 따른 물리적 감가와 AI 비전 분석을 통한 관찰감가를 순차적으로 적용하여 최종 가액을 산출함.
+        </div>
+    </div>
+
+    <!-- 3페이지: 대상물건 전경 -->
+    <div class="page">
+        <div class="page-header">
+            <span>대상물건 전경</span>
+        </div>
+        <div class="section-title">3. 대상물건 상세 사진 (전경)</div>
+        <div style="border: 1px solid #ddd; background: #fafafa; text-align: center; padding: 10px; margin-top: 20px;">
+            {% if main_image and main_image != "" %}
+            <img src="{{ main_image }}" style="width: 100%; max-height: 200mm; object-fit: contain;">
+            {% else %}
+            <div style="padding: 100px; color: #999;">[전경 사진 데이터 없음]</div>
+            {% endif %}
+        </div>
+        <div style="margin-top: 20px; font-size: 10pt; color: #666; text-align: center;">대상 물건의 전체적인 외관 및 주변 환경</div>
+    </div>
+
+    <!-- 4페이지: AI 결함 분석 결과 -->
+    <div class="page">
+        <div class="page-header">
+            <span>AI 결함 분석 상세</span>
+        </div>
+        <div class="section-title">4. AI Vision 결함 탐지 분석 상세</div>
+        <div style="border: 1px solid #ddd; background: #fafafa; text-align: center; padding: 10px; margin-top: 20px;">
+            {% if defect_image and defect_image != "" %}
+            <img src="{{ defect_image }}" style="width: 100%; max-height: 200mm; object-fit: contain;">
+            {% else %}
+            <div style="padding: 100px; color: #999;">[AI 결함 분석 데이터 없음]</div>
+            {% endif %}
+        </div>
+        <p style="margin-top: 20px; font-size: 10pt; line-height: 1.6;">
+            AI Vision 엔진(YOLOv8)에 의한 결함 탐지 결과입니다. 추출된 결함률은 <strong>{{ defect_ratio }}%</strong>이며, 
+            노후도 기준에 의거 <strong>{{ severity }}</strong> 등급으로 판정되었습니다.
+        </p>
+    </div>
+
+    <!-- 5페이지: AI 종합 의견 -->
+    <div class="page">
+        <div class="page-header">
+            <span>AI 모델 기반 감정평가 종합 의견</span>
+        </div>
+        <div class="section-title">5. AI 모델 기반 감정평가 종합 의견</div>
+        <div style="background: #fdfdfd; border: 1px solid #eee; padding: 30px; min-height: 200mm;">
+            <div class="markdown-text" style="font-size: 11pt; color: #333;">
+                {{ llm_content | safe }}
+            </div>
+        </div>
+        <div style="margin-top: 30px; text-align: center; color: #bbb; font-size: 8pt; border-top: 1px dashed #eee; padding-top: 10px;">
+            본 리포트는 AI 비전 분석 및 LLM 기술을 활용하여 자동으로 생성된 사전 참고용 약식 보고서입니다.
+        </div>
+    </div>
+</body>
+
+</html>

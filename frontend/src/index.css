@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'Courier New', Courier, monospace;
+  
+  --color-brand-bg: #F4F7F9;
+  --color-brand-header: #1E293B;
+  --color-brand-accent: #2563EB;
+  --color-brand-accent-dark: #1E40AF;
+  --color-brand-text-main: #1E293B;
+  --color-brand-text-sub: #64748B;
+  --color-brand-border: #E2E8F0;
+  --color-brand-danger: #EF4444;
+  --color-brand-success: #22C55E;
+}
+
+@layer base {
+  body {
+    @apply bg-brand-bg text-brand-text-main antialiased;
+  }
+}
+
+@layer components {
+  .panel-title {
+    @apply text-[0.75rem] font-bold uppercase text-brand-text-sub tracking-wider mb-4 flex justify-between items-center;
+  }
+  
+  .panel-title span {
+    @apply bg-brand-bg px-2 py-0.5 rounded text-[0.65rem] font-bold;
+  }
+
+  .data-item {
+    @apply border-b border-brand-bg pb-2 mb-2 last:border-0;
+  }
+
+  .data-item label {
+    @apply text-[0.7rem] text-brand-text-sub block;
+  }
+
+  .data-item value {
+    @apply font-semibold text-[0.9rem] block;
+  }
+
+  .mono {
+    @apply font-mono;
+  }
+}
