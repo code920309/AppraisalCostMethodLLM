@@ -20,12 +20,13 @@ RUN apt-get update && apt-get install -y \
 COPY backend/requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy backend code and required directories
-# backend/app -> /app/app
+# Copy backend code
 COPY backend/app ./app
-# backend/models -> /app/models (for AI inference)
-COPY backend/models ./models
-# backend/assets -> /app/assets (if needed)
+
+# 빈 디렉터리 사전 생성 (모델/폰트는 런타임에 자동 다운로드)
+RUN mkdir -p /app/models /app/assets/fonts
+
+# backend/assets 복사 (.gitkeep 포함, 실제 폰트는 런타임 다운로드)
 COPY backend/assets ./assets
 
 # Copy static files (React build artifacts)
