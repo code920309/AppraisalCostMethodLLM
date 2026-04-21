@@ -22,6 +22,15 @@ class Config:
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     YOLO_MODEL_PATH = os.path.join(BASE_DIR, "models", "yolov8m-seg.pt")
     
+    @classmethod
+    def ensure_model_exists(cls):
+        import urllib.request
+        os.makedirs(os.path.dirname(cls.YOLO_MODEL_PATH), exist_ok=True)
+        if not os.path.exists(cls.YOLO_MODEL_PATH):
+            print(f"Downloading YOLO model to {cls.YOLO_MODEL_PATH}...")
+            url = "https://huggingface.co/donggyuuu/yolo-v8-appraisal/resolve/main/yolov8m-seg.pt"
+            urllib.request.urlretrieve(url, cls.YOLO_MODEL_PATH)
+            print("Download complete.")
     # Log Config
     LOG_DIR = os.path.join(BASE_DIR, "logs")
     if not os.path.exists(LOG_DIR):

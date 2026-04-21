@@ -225,3 +225,5 @@ backend/.env
 backend/logs/
 backend/reports/*.pdf
 backend/__pycache__/
+backend/models/*.pt
+backend/assets/fonts/malgun*.ttf

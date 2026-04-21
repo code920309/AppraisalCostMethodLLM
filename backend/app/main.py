@@ -14,6 +14,9 @@ if sys.platform == 'win32':
 
 logger = get_logger(__name__)
 
+# Ensure model exists before app starts
+Config.ensure_model_exists()
+
 app = FastAPI(
     title="AppraisalCost AI API",
     description="建物(건물) 가치 산정 및 외벽 결함 분석 API",
