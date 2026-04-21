@@ -41,5 +41,9 @@ ENV PORT=7860
 # Expose port (Hugging Face Spaces default)
 EXPOSE 7860
 
+# Playwright에 필요한 라이브러리 및 브라우저 설치 (CMD 이전에 배치)
+RUN pip install playwright
+RUN playwright install chromium --with-deps
+
 # Run the application
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "7860"]
