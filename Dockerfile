@@ -1,8 +1,9 @@
 # Stage 1: Build React frontend
-FROM node:18 AS build-stage
+FROM node:22-slim AS build-stage
 WORKDIR /app/frontend
+# package.json + package-lock.json 함께 복사 → npm ci 사용
 COPY frontend/package*.json ./
-RUN npm install
+RUN npm ci --include=optional
 COPY frontend/ ./
 RUN npm run build
 
