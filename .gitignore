@@ -226,4 +226,4 @@ backend/logs/
 backend/reports/*.pdf
 backend/__pycache__/
 backend/models/*.pt
-backend/assets/fonts/malgun*.ttf
+backend/assets/fonts/*.ttf

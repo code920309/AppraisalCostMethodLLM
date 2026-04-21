@@ -21,7 +21,14 @@ class Config:
     # Model Paths
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     YOLO_MODEL_PATH = os.path.join(BASE_DIR, "models", "yolov8m-seg.pt")
-    
+    FONT_DIR = os.path.join(BASE_DIR, "assets", "fonts")
+
+    # NanumGothic - Google Fonts GitHub raw CDN
+    _FONT_URLS = {
+        "NanumGothic.ttf": "https://github.com/google/fonts/raw/main/ofl/nanumgothic/NanumGothic-Regular.ttf",
+        "NanumGothic-Bold.ttf": "https://github.com/google/fonts/raw/main/ofl/nanumgothic/NanumGothic-Bold.ttf",
+    }
+
     @classmethod
     def ensure_model_exists(cls):
         import urllib.request
@@ -30,7 +37,19 @@ class Config:
             print(f"Downloading YOLO model to {cls.YOLO_MODEL_PATH}...")
             url = "https://huggingface.co/donggyuuu/yolo-v8-appraisal/resolve/main/yolov8m-seg.pt"
             urllib.request.urlretrieve(url, cls.YOLO_MODEL_PATH)
-            print("Download complete.")
+            print("YOLO model download complete.")
+
+    @classmethod
+    def ensure_fonts_exist(cls):
+        import urllib.request
+        os.makedirs(cls.FONT_DIR, exist_ok=True)
+        for filename, url in cls._FONT_URLS.items():
+            dest = os.path.join(cls.FONT_DIR, filename)
+            if not os.path.exists(dest):
+                print(f"Downloading font: {filename}...")
+                urllib.request.urlretrieve(url, dest)
+                print(f"Font downloaded: {filename}")
+
     # Log Config
     LOG_DIR = os.path.join(BASE_DIR, "logs")
     if not os.path.exists(LOG_DIR):

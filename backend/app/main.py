@@ -14,8 +14,9 @@ if sys.platform == 'win32':
 
 logger = get_logger(__name__)
 
-# Ensure model exists before app starts
+# 서버 시작 시 필요한 파일 자동 다운로드 (모델, 폰트)
 Config.ensure_model_exists()
+Config.ensure_fonts_exist()
 
 app = FastAPI(
     title="AppraisalCost AI API",
