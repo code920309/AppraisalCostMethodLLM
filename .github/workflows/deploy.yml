@@ -13,8 +13,17 @@ jobs:
           fetch-depth: 0
           lfs: true
 
-      - name: Push to Hugging Face Spaces
+      - name: Push to Hugging Face Spaces (history-free)
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          git push --force https://donggyuuu:$HF_TOKEN@huggingface.co/spaces/donggyuuu/AppraisalAI-Suite main
+          git config user.email "ci@github-actions"
+          git config user.name "GitHub Actions"
+
+          # 히스토리 없는 새 브랜치 생성 (대용량 파일이 포함된 과거 커밋 제거)
+          git checkout --orphan deploy-branch
+          git add -A
+          git commit -m "deploy: $(date +'%Y-%m-%d %H:%M:%S')"
+
+          # HF Spaces에 단일 커밋만 강제 push
+          git push --force https://donggyuuu:$HF_TOKEN@huggingface.co/spaces/donggyuuu/AppraisalAI-Suite deploy-branch:main
