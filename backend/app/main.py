@@ -17,6 +17,8 @@ logger = get_logger(__name__)
 # 서버 시작 시 필요한 파일 자동 다운로드 (모델, 폰트)
 Config.ensure_model_exists()
 Config.ensure_fonts_exist()
+# 필수 환경변수 누락 여부 경고 출력
+Config.validate_env()
 
 app = FastAPI(
     title="AppraisalCost AI API",
