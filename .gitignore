@@ -219,6 +219,9 @@ frontend/dist/
 frontend/build/
 .env*
 !frontend/.env.example
+# frontend/src/lib/은 Python 빌드용 lib/ 규칙에서 명시적 예외 처리
+!frontend/src/lib/
+!frontend/src/lib/**
 
 # Backend
 backend/.env
