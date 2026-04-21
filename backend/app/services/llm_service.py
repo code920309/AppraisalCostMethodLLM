@@ -102,7 +102,7 @@ def generate_appraisal_report(defect_ratio, severity, confidence, structure_type
                 
             headers = {"Authorization": f"Bearer {Config.LLM_API_KEY}", "Content-Type": "application/json"}
             payload = {
-                "model": "llama-3.3-70b-instruct", 
+                "model": "llama-3.3-70b-versatile", 
                 "messages": [
                     {"role": "system", "content": system_prompt}, 
                     {"role": "user", "content": user_prompt}
