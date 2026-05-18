@@ -1,3 +1,13 @@
+---
+title: AppraisalAI-Suite
+emoji: 🏢
+colorFrom: blue
+colorTo: indigo
+sdk: docker
+pinned: false
+app_port: 7860
+---
+
 # AppraisalCost AI Suite
 
 [![Deploy Status](https://img.shields.io/badge/Deploy-Hugging_Face-blue?logo=huggingface)](https://huggingface.co/spaces/donggyuuu/AppraisalAI-Suite)
